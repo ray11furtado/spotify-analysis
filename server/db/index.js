@@ -1,5 +1,4 @@
-'use strict';
-var db = require('./_db');
-module.exports = db;
+import db from './_db';
 
-var User = require('./models/users');
+
+export default db;

@@ -1,13 +1,13 @@
 import chalk from 'chalk';
 import Server from 'http';
 import App from './app';
-// import db from './db';
+import db from './db';
 
 //	Start node Server
 
 const myServer = Server.createServer();
 
-const createApp = () => myServer.on('request', App());
+const createApp = () => myServer.on('request', App(db));
 
 const startServer = () => {
   const PORT = process.env.PORT || 3001;
@@ -16,7 +16,5 @@ const startServer = () => {
 	});
 };
 
-// createApp.then(startServer).catch(err =>
-// 	console.error(chalk.red(err.stack)));
-createApp();
-startServer();
+db.sync().then(createApp).then(startServer).catch(err =>
+	console.error(chalk.red(err.stack)));
