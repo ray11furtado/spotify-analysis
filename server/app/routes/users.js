@@ -4,7 +4,7 @@ import router from 'express';
 const myRouter = router.Router();
 
 myRouter.post('signup', (req, res) => {
-	User.findOne({
+	Users.findOne({
 		where: {
 			email: req.body.email,
 		},

@@ -1,17 +1,13 @@
-import path from 'path';
 import session from 'express-session';
 import passport from 'passport';
+import googleAuth from './google';
+import spotifyAuth from './spotify';
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const ENABLED_AUTH_STRATEGIES = [
-    'spotify',
-];
 
 module.exports = (app, db) => {
-    const dbStore = new SequelizeStore({
-        db,
-    });
+    const dbStore = new SequelizeStore({ db });
 
     const User = db.model('user');
 
@@ -65,7 +61,6 @@ module.exports = (app, db) => {
     });
 
     // Each strategy enabled gets registered.
-    ENABLED_AUTH_STRATEGIES.forEach((strategyName) => {
-        require(path.join(__dirname, strategyName))(app, db);
-    });
+    googleAuth(app, db);
+    spotifyAuth(app, db);
 };
