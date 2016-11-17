@@ -1,6 +1,5 @@
 import session from 'express-session';
 import passport from 'passport';
-import googleAuth from './google';
 import spotifyAuth from './spotify';
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -54,13 +53,11 @@ module.exports = (app, db) => {
         }
     });
 
-    // Simple /logout route.
+
     app.get('/logout', (req, res) => {
         req.logout();
         res.status(200).end();
     });
 
-    // Each strategy enabled gets registered.
-    googleAuth(app, db);
     spotifyAuth(app, db);
 };
