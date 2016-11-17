@@ -1,10 +1,10 @@
 module.exports = {
   entry: [
-  '.browser/index.js',
+  './browser/index.js',
   ],
   output: {
     path: `${__dirname}/public`,
-    finename: 'bundle.js',
+    filename: 'bundle.js',
   },
   module: {
     loaders: [{

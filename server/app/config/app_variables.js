@@ -5,9 +5,8 @@ import util from 'util';
 const rootPath = path.join(__dirname, '../../../');
 const indexPath = path.join(rootPath, './server/app/views/index.html');
 
-// const faviconPath = path.join(rootPath, './server/app/views/favicon.ico');
 
-// const env = require(path.join(rootPath, './server/env'));
+const env = require(path.join(rootPath, './server/env'));
 
 const logMiddleWare = (req, res, next) => {
 	util.log(('---NEW REQUEST--'));
