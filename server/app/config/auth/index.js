@@ -13,8 +13,7 @@ module.exports = (app, db) => {
     dbStore.sync();
 
     // First, our session middleware will set/read sessions from the request.
-    // Our sessions will get stored in Mongo using the same connection from
-    // mongoose. Check out the sessions collection in your MongoCLI.
+
     app.use(session({
         secret: app.getValue('env').SESSION_SECRET,
         store: dbStore,
