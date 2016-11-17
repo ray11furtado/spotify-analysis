@@ -5,8 +5,8 @@ import routes from './routes';
 
 const app = express();
 
-export default () => {
-	config(app);
+export default (db) => {
+	config(app, db);
 	app.use('/api', routes);
 
 	// middleware to catch nay urls with a file extension

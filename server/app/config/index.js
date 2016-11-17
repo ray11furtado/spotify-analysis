@@ -2,6 +2,7 @@ import variables from './app_variables';
 import staticMiddleware from './static_middleware';
 import parsingMiddleware from './parsing_middleware';
 
+
 export default (app) => {
 	app.setValue = app.set.bind(app);
 

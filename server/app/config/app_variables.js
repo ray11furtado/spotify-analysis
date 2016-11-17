@@ -17,6 +17,7 @@ const logMiddleWare = (req, res, next) => {
 };
 
 export default (app) => {
+	app.setValue('env', env);
 	app.setValue('projectRoot', rootPath);
 	app.setValue('indexHTMLPath', indexPath);
 	app.setValue('log', logMiddleWare);
