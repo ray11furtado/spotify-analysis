@@ -1,5 +1,4 @@
 import router from 'express';
-import db from '../../../db';
 
 
 const myRouter = router.Router();
