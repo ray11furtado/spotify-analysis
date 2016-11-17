@@ -1,3 +1,4 @@
 import React from 'react';
+import NavBar from './navbar';
 
-export default () => <div>Hello this is the App Component</div>;
+export default () => <div><NavBar /></div>;
