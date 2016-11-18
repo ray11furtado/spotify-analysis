@@ -1,6 +1,5 @@
 import session from 'express-session';
 import passport from 'passport';
-import googleAuth from './google';
 import spotifyAuth from './spotify';
 
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -14,8 +13,7 @@ module.exports = (app, db) => {
     dbStore.sync();
 
     // First, our session middleware will set/read sessions from the request.
-    // Our sessions will get stored in Mongo using the same connection from
-    // mongoose. Check out the sessions collection in your MongoCLI.
+
     app.use(session({
         secret: app.getValue('env').SESSION_SECRET,
         store: dbStore,
@@ -54,13 +52,11 @@ module.exports = (app, db) => {
         }
     });
 
-    // Simple /logout route.
+
     app.get('/logout', (req, res) => {
         req.logout();
         res.status(200).end();
     });
 
-    // Each strategy enabled gets registered.
-    googleAuth(app, db);
     spotifyAuth(app, db);
 };

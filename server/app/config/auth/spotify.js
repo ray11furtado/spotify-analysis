@@ -11,6 +11,7 @@ export default (app, db) => {
 		clientSecret: spotifyConfig.clientSecret,
 		callbackURL: spotifyConfig.callbackURL,
 	};
+
 	const verifyCallback = (accessToken, refreshToken, profile, done) => {
 		console.log(profile);
 		User.findOne({

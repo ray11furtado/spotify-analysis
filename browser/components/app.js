@@ -1,4 +1,11 @@
-import React from 'react';
-import NavBar from './navbar';
+import React, { Component } from 'react';
 
-export default () => <div><NavBar /></div>;
+export default class App extends Component {
+	render() {
+		return (
+		<div>
+			{this.props.children}
+		</div>
+		);
+	}
+}
