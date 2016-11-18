@@ -13,7 +13,7 @@ export default (app, db) => {
 	};
 
 	const verifyCallback = (accessToken, refreshToken, profile, done) => {
-		console.log(profile);
+		console.log(profile.id);
 		User.findOne({
 			where: {
 				spotify_id: profile.id,
@@ -24,6 +24,8 @@ export default (app, db) => {
 				return user;
 			} return User.create({
 				spotify_id: profile.id,
+				access_token: accessToken,
+				refresh_token: refreshToken,
 			});
 		})
 		.then((userToLogin) => {
@@ -39,7 +41,7 @@ export default (app, db) => {
 	app.get('/auth/spotify', passport.authenticate('spotify',
 		{ scope: ['playlist-read-private', 'user-read-private', 'user-library-read'] }));
 
-  app.get('/auth/spotify/callback',
+  app.get('/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
            (req, res) => {
             res.redirect('/');

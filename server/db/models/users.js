@@ -2,9 +2,6 @@ import Sequelize from 'sequelize';
 import db from '../_db';
 
 module.exports = db.define('user', {
-	google_id: {
-		type: Sequelize.STRING,
-	},
 	spotify_id: {
 		type: Sequelize.STRING,
   },

@@ -15,7 +15,7 @@ export default class Login extends Component {
 					<a href="/auth/spotify">Connect To Spotify</a>
 				</button>
 				<h6 className="port">
-					This is intended for Portfolio Purposes,
+					This is intended for Portfolio Purposes
 				</h6>
 			</div>
 		);
