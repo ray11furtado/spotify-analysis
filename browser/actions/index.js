@@ -1,18 +1,21 @@
+import axios from 'axios';
+import { browserHistory } from 'react-router';
 import {
 	LOG_IN,
 	LOG_OUT,
  } from './types';
 
 export function login() {
-	return {
-		type: LOG_IN,
-		payload: true,
+	return (dispatch) => {
+		dispatch({ type: LOG_IN });
+		browserHistory.push('/home');
 	};
 }
 
 export function logout() {
-	return {
-		type: LOG_OUT,
-		payload: false,
+	return (dispatch) => {
+		dispatch({ type: LOG_OUT });
+		browserHistory.push('/login');
 	};
 }
+

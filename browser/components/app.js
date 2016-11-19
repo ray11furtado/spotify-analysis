@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../containers/navbar';
-// import Test from '../containers/test';
+import Test from '../containers/test';
 
 
 export default class App extends Component {
@@ -8,6 +8,7 @@ export default class App extends Component {
     return (
       <div>
 					<Navbar />
+					<Test />
 					{this.props.children}
       </div>
     );

@@ -20,7 +20,7 @@ class Header extends Component {
 	}
 	button2() {
 		return (
-			<button onClick={() => this.props.login(true)}className='btn btn-warn'>seend true</button>
+			<button onClick={() => this.props.login()}className='btn btn-warn'>seend true</button>
 			);
 	}
 

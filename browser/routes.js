@@ -8,6 +8,6 @@ import Auth from './components/auth';
 export default (
 	<Route path="/" component={Auth(App)}>
 		<Route path="login" component={Login} />
-		<Route path="home" component={Home} />
+		<Route path="home" component={Auth(Home)} />
 	</Route>
 );

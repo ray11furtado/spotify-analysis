@@ -12,6 +12,7 @@ export default function(ComposedComponent) {
 				this.context.router.push('/login')
 			}
 		}
+
 		render() {
 			return <ComposedComponent {...this.props} />
 		}
