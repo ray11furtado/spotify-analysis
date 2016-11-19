@@ -15,9 +15,12 @@ export function login() {
 
 export function logout() {
 	return (dispatch) => {
-		dispatch({ type: LOG_OUT });
-		browserHistory.push('/login');
-	};
+		axios.get('/api/users/signout')
+			.then(() => {
+				dispatch({ type: LOG_OUT, payload: null });
+				browserHistory.push('/login');
+			});
+		};
 }
 
 export function signin() {
@@ -26,6 +29,16 @@ export function signin() {
 		.then((res) => {
 				dispatch({ type: SIGN_IN, payload: res.data });
 		}).catch(() => browserHistory.push('/login'));
+	};
+}
+
+export function signout() {
+	return (dispatch) => {
+		// this will destroy session, want to remove state.user as well
+		axios.get('/api/users/signout')
+		.then(() => {
+			dispatch({ type: SIGN_OUT, payload: null });
+		});
 	};
 }
 

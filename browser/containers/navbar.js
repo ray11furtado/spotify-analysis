@@ -5,6 +5,7 @@ import * as actions from '../actions';
 require('../style/navbar.scss');
 
 class Navbar extends Component {
+
 	display() {
 		if (this.props.authenticated) {
 			return (

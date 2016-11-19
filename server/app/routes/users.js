@@ -7,7 +7,6 @@ const Users = db.model('user');
 module.exports = Router;
 
 Router.get('/info', (req, res, next) => {
-	console.log(req);
 	Users.findOne({
 		where: {
 			spotify_id: req.user.spotify_id,
@@ -18,3 +17,17 @@ Router.get('/info', (req, res, next) => {
 	.catch(() => next());
 });
 
+Router.get('/signout', (req, res, next) => {
+	Users.findOne({
+		where: {
+			spotify_id: req.user.spotify_id,
+		},
+	})
+	.then(() => {
+		req.session.destroy();
+	})
+	.then(() => {
+		res.send(200);
+	})
+	.catch(next);
+});
