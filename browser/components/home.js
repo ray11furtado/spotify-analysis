@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import * as actions from '../actions';
 import { connect } from 'react-redux';
+import * as actions from '../actions';
+
 
 class Home extends Component {
 
 	componentWillMount() {
 		this.props.login();
-		axios.get('api/users/info')
-		.then(res => console.log(res));
+		this.props.signin();
 	}
 
 	render() {
 		return (
 			<div>
 				Welcome to the Home Page
+				{this.props.user.id}
 			</div>
 			);
 	}
 }
 
 function mapStateToProps(state) {
-	return { authenticated: state.authenticated };
+	return { user: state.user };
 }
 
 export default connect(mapStateToProps, actions)(Home);

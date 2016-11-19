@@ -5,7 +5,7 @@ import * as actions from '../actions';
 class Navbar extends Component {
 	display() {
 		if (this.props.authenticated) {
-			return <div>Spotify Account: { this.props.user }</div>;
+			return <div>Spotify Account: { this.props.user.spotify_id }</div>;
 		}
 		return <div />;
 	}
@@ -20,7 +20,8 @@ class Navbar extends Component {
 }
 
 function mapStateToProps(state) {
-	return { authenticated: state.authenticated };
+	return { authenticated: state.authenticated,
+						user: state.user };
 }
 
 export default connect(mapStateToProps, actions)(Navbar);
