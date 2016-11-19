@@ -1,8 +1,10 @@
-import express from 'express';
+const router = require('express').Router();
 
-const router = express.Router();
+module.exports = router;
 
-export default router.use((req, res) => {
-	res.status(404).end();
+router.use('/users', require('./users'));
+
+
+router.use((req, res) => {
+    res.status(404).end();
 });
-

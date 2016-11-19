@@ -1,23 +1,13 @@
-import router from 'express';
+import db from '../../db';
 
+const Router = require('express').Router();
 
-const myRouter = router.Router();
+const Users = db.model('user');
 
-myRouter.post('signup', (req, res) => {
-	Users.findOne({
-		where: {
-			email: req.body.email,
-		},
-	}).then((user) => {
-		if (user) {
-			res.sendStatus(403);
-			throw new Error('Email is already registered');
-		}
-		return User.create(req.body);
-	}).then(() => res.send(200));
-});
+module.exports = Router;
 
-myRouter.get('info', (req, res, next) => {
+Router.get('/info', (req, res, next) => {
+	console.log(req);
 	Users.findOne({
 		where: {
 			spotify_id: req.user.spotify_id,
@@ -27,4 +17,4 @@ myRouter.get('info', (req, res, next) => {
 	.then(() => res.send(200))
 	.catch(() => next());
 });
-export default myRouter;
+
