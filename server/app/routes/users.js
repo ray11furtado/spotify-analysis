@@ -16,3 +16,15 @@ myRouter.post('signup', (req, res) => {
 		return User.create(req.body);
 	}).then(() => res.send(200));
 });
+
+myRouter.get('info', (req, res, next) => {
+	Users.findOne({
+		where: {
+			spotify_id: req.user.spotify_id,
+		},
+	})
+	.then(user => res.send(user))
+	.then(() => res.send(200))
+	.catch(() => next());
+});
+export default myRouter;
