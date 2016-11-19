@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * actions from '../actions';
 
 require('../style/login.scss');
 

@@ -4,6 +4,7 @@
   "rules":{
     "react/jsx-filename-extension" : 0,
     "indent":0,
+    "react/jsx-wrap-multilines" : 0,
     "no-unused-vars": 1,
     "no-undef": 0,
     "new-cap": 0,
