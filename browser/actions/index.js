@@ -1,8 +1,18 @@
-import { CHANGE_AUTH } from './types';
+import {
+	LOG_IN,
+	LOG_OUT,
+ } from './types';
 
-export function authenticate(isLoggedIn) {
+export function login() {
 	return {
-		type: CHANGE_AUTH,
-		payload: isLoggedIn,
+		type: LOG_IN,
+		payload: true,
+	};
+}
+
+export function logout() {
+	return {
+		type: LOG_OUT,
+		payload: false,
 	};
 }

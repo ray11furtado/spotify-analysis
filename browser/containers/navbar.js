@@ -3,22 +3,17 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 class Navbar extends Component {
-	authButton() {
+	display() {
 		if (this.props.authenticated) {
-			console.log(this.props.authenticated);
-			return (<button onClick={() => this.props.changeAuth(false)} className="btn btn-success">
-								Sign Out
-							</button>);
-			}
-			console.log(this.props.authenticated);
-			return (<button onClick={() => this.props.changeAuth(true)} className="btn btn-warn">
-								Sign in
-							</button>);
+			return <div>Spotify Account: { this.props.user }</div>;
+		}
+		return <div />;
 	}
+
 	render() {
 		return (
 			<div>
-				{this.authButton()}
+				{this.display()}
 			</div>
 			);
 	}
