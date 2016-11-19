@@ -7,6 +7,8 @@ class Home extends Component {
 
 	componentWillMount() {
 		this.props.login();
+		axios.get('api/users/info')
+		.then(res => console.log(res));
 	}
 
 	render() {
