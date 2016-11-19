@@ -18,14 +18,7 @@ Router.get('/info', (req, res, next) => {
 });
 
 Router.get('/signout', (req, res, next) => {
-	Users.findOne({
-		where: {
-			spotify_id: req.user.spotify_id,
-		},
-	})
-	.then(() => {
-		req.session.destroy();
-	})
+	req.session.destroy()
 	.then(() => {
 		res.send(200);
 	})

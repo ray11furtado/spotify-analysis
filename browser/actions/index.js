@@ -32,13 +32,3 @@ export function signin() {
 	};
 }
 
-export function signout() {
-	return (dispatch) => {
-		// this will destroy session, want to remove state.user as well
-		axios.get('/api/users/signout')
-		.then(() => {
-			dispatch({ type: SIGN_OUT, payload: null });
-		});
-	};
-}
-
