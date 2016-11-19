@@ -11,9 +11,11 @@ export default class Login extends Component {
 						Songs, Artists or Even Your Spotify Playlist
 				</h4>
 				<h5>Please Connect to Spotify to Continue</h5>
-				<button className="btn-lg btn-success">
-					<a href="/auth/spotify">Connect To Spotify</a>
-				</button>
+				<a href="/auth/spotify">
+					<button className="btn-lg btn-success">
+						Connect To Spotify
+					</button>
+				</a>
 				<h6 className="port">
 					This is intended for Portfolio Purposes
 				</h6>
