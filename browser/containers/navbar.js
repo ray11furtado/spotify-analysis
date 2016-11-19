@@ -2,10 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+require('../style/navbar.scss');
+
 class Navbar extends Component {
 	display() {
 		if (this.props.authenticated) {
-			return <div>Spotify Account: { this.props.user.spotify_id }</div>;
+			return (
+				<div className="mynav">
+				<nav className="nav-bar navbar-light">
+					<ul className="nav navbar-nav">
+						<li className="nav-item">
+							Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
+						</li>
+					</ul>
+				</nav>
+				<button className="btn btn-danger pull-right" onClick={() => this.props.logout()}>
+					Logout
+				</button>
+				</div>
+
+				);
 		}
 		return <div />;
 	}

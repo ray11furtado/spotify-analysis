@@ -8,7 +8,7 @@ export default function(ComposedComponent) {
 		}
 
 		componentWillMount(){
-			if(!this.props.authenticated) {
+			if(!this.props.user.spotify_id) {
 				this.context.router.push('/login')
 			}
 		}
@@ -18,7 +18,8 @@ export default function(ComposedComponent) {
 		}
 	}
 	function mapStateToProps(state){
-		return { authenticated: state.authenticated };
+		return { authenticated: state.authenticated,
+							user: state.user };
 	}
 	return connect(mapStateToProps)(Authentication);
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Navbar from '../containers/navbar';
 
 
 class Home extends Component {
@@ -13,8 +14,7 @@ class Home extends Component {
 	render() {
 		return (
 			<div>
-				Welcome to the Home Page
-				{this.props.user.id}
+				<Navbar />
 			</div>
 			);
 	}

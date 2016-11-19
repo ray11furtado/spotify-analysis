@@ -25,7 +25,7 @@ export function signin() {
 		axios.get('/api/users/info')
 		.then((res) => {
 				dispatch({ type: SIGN_IN, payload: res.data });
-		});
+		}).catch(() => browserHistory.push('/login'));
 	};
 }
 
