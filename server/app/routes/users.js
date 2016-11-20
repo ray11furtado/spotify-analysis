@@ -17,10 +17,7 @@ Router.get('/info', (req, res, next) => {
 	.catch(() => next());
 });
 
-Router.get('/signout', (req, res, next) => {
-	req.session.destroy()
-	.then(() => {
-		res.send(200);
-	})
-	.catch(next);
+Router.get('/signout', (req, res) => {
+	req.session.destroy();
+	res.redirect('/login');
 });
