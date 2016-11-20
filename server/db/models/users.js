@@ -11,4 +11,5 @@ module.exports = db.define('user', {
   refresh_token: {
     type: Sequelize.TEXT,
 	},
-}).sync({ force: true });
+});
+

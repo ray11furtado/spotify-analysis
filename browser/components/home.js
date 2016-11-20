@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import _ from 'lodash';
 import * as actions from '../actions';
-import Navbar from '../containers/navbar';
-
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { playlist: null };
-	}
 
 	componentWillMount() {
 		this.props.login();
 		this.props.signin();
 	}
 
+	displayPlaylist() {
+		if (this.props.user.playlist[0]) {
+			const allPlaylist = this.props.user.playlist;
+			return allPlaylist.map(singlePlaylist =>
+				<li key={singlePlaylist.href}>{singlePlaylist.name}</li>);
+		} return <div className="text-center">Loading...</div>;
+	}
+
 	render() {
 		return (
 			<div>
-				<Navbar />
+				<ul>
+					{this.displayPlaylist()}
+				</ul>
 			</div>
 			);
 	}

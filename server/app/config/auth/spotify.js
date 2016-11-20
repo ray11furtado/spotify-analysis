@@ -13,7 +13,6 @@ export default (app, db) => {
 	};
 
 	const verifyCallback = (accessToken, refreshToken, profile, done) => {
-		console.log(profile.id);
 		User.findOne({
 			where: {
 				spotify_id: profile.id,

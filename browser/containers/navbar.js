@@ -7,7 +7,7 @@ require('../style/navbar.scss');
 class Navbar extends Component {
 
 	display() {
-		if (this.props.authenticated) {
+		if (this.props.user.spotify_id) {
 			return (
 				<div className="mynav">
 				<nav className="nav-bar navbar-light">
