@@ -7,7 +7,7 @@ import {
 	SEARCH_PLAYLIST,
  } from './types';
 
-const spotify = 'https://api.spotify.com'l
+const spotify = 'https://api.spotify.com';
 
 export function login() {
 	return (dispatch) => {
