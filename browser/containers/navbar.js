@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import * as actions from '../actions';
 
 require('../style/navbar.scss');
@@ -10,15 +11,13 @@ class Navbar extends Component {
 		if (this.props.user.spotify_id) {
 			return (
 				<div className="mynav">
-				<nav className="nav-bar navbar-light">
-					<ul className="nav navbar-nav">
-						<li className="nav-item">
-							Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
-						</li>
-					</ul>
-				</nav>
-				<span className="logout pull-right" onClick={() => this.props.logout()}>
+				<Link className="pull-left home-link" to={'home'}> Home</Link>
+				<Link className="home-link" to={'playlist'}>Your Playlists</Link>
+				<span className="logout" onClick={() => this.props.logout()}>
 					Logout
+				</span>
+				<span className="nav-item pull-right">
+						Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
 				</span>
 				</div>
 				);

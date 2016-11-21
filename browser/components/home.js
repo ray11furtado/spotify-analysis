@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import Playlists from '../containers/playlists';
 import * as actions from '../actions';
 
 require('../style/home.scss');
@@ -15,7 +17,7 @@ class Home extends Component {
 		if (this.props.user.playlist[0]) {
 			const allPlaylist = this.props.user.playlist;
 			return allPlaylist.map(singlePlaylist =>
-				<div className="col-md-3 playlist-container">
+				<div key={singlePlaylist.snapshot_id} className="col-md-3 playlist-container">
 					<div className="container">
 						<h5><strong>{singlePlaylist.name}</strong></h5>
 						<img
@@ -41,6 +43,7 @@ class Home extends Component {
 					<h2>{this.header()}</h2>
 				<ul>
 					{this.displayPlaylist()}
+					{this.props.children}
 				</ul>
 			</div>
 			);
