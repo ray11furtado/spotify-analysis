@@ -28,7 +28,7 @@ export function signin() {
 		axios.get('/api/users/info')
 		.then((res) => {
 				const data = res.data;
-				axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`;
+				axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
 				axios.get(`https://api.spotify.com/v1/users/${data.spotify_id}/playlists`)
 				.then(response => response.data.items)
 				.then((playlists) => {
@@ -38,4 +38,3 @@ export function signin() {
 		}).catch(() => browserHistory.push('/login'));
 	};
 }
-

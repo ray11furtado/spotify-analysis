@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
+require('../style/home.scss');
+
 class Home extends Component {
 
 	componentWillMount() {
@@ -14,7 +16,7 @@ class Home extends Component {
 			const allPlaylist = this.props.user.playlist;
 			return allPlaylist.map(singlePlaylist =>
 				<li key={singlePlaylist.href}>{singlePlaylist.name}</li>);
-		} return <div className="text-center">Loading...</div>;
+		} return <div className="text-center loading">Loading...</div>;
 	}
 
 	render() {

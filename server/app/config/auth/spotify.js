@@ -20,7 +20,16 @@ export default (app, db) => {
 		})
 		.then((user) => {
 			if (user) {
-				return user;
+				return User.update({
+					access_token: accessToken,
+					refresh_token: refreshToken,
+				},
+				{
+					where: {
+						spotify_id: profile.id,
+					},
+					returning: true,
+				});
 			} return User.create({
 				spotify_id: profile.id,
 				access_token: accessToken,
@@ -37,6 +46,7 @@ export default (app, db) => {
 	};
 
 	passport.use(new SpotifyStrategy(spotifyCredentials, verifyCallback));
+
 	app.get('/auth/spotify', passport.authenticate('spotify',
 		{ scope: ['playlist-read-private', 'user-read-private', 'user-library-read'] }));
 
@@ -46,4 +56,3 @@ export default (app, db) => {
             res.redirect('/home');
   });
 };
-
