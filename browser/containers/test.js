@@ -16,7 +16,9 @@ class Header extends Component {
 	button1() {
 		return (<button 
 							onClick={() => this.props.signin()}
-							className='btn btn-success'>send false</button>);
+							className='btn btn-success'>
+							send false
+						</button>);
 	}
 	button2() {
 		return (

@@ -20,24 +20,17 @@ export default (app, db) => {
 		})
 		.then((user) => {
 			if (user) {
-				User.destroy({
-					where: {
-						spotify_id: profile.id,
-					},
-				})
-				.then(() => {
-					User.create({
-						spotify_id: profile.id,
-						access_token: accessToken,
-						refresh_token: refreshToken,
-					});
+				return user.update({
+					access_token: accessToken,
+					refresh_token: refreshToken,
 				});
-			} return User.create({
-				spotify_id: profile.id,
-				access_token: accessToken,
-				refresh_token: refreshToken,
-			});
-		})
+				}
+				return User.create({
+					spotify_id: profile.id,
+					access_token: accessToken,
+					refresh_token: refreshToken,
+				});
+			})
 		.then((userToLogin) => {
 			done(null, userToLogin);
 		})

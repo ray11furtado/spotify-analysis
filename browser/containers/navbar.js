@@ -17,11 +17,10 @@ class Navbar extends Component {
 						</li>
 					</ul>
 				</nav>
-				<button className="btn btn-danger pull-right" onClick={() => this.props.logout()}>
+				<span className="logout pull-right" onClick={() => this.props.logout()}>
 					Logout
-				</button>
+				</span>
 				</div>
-
 				);
 		}
 		return <div />;
