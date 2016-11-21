@@ -5,9 +5,8 @@ import * as actions from '../actions';
 class singePlaylist extends Component {
 
 	display() {
-		console.log(this.props.search.content);
-		if (this.props.search.content.name) {
-			const playlist = this.props.search.content.name;
+		console.log(this.props.search);
+		if (this.props.search) {
 			return <div>playlist</div>;
 		} return <div>Loading...</div>;
 	}

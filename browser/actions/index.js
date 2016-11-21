@@ -52,7 +52,13 @@ export function searchPlaylist(playlistHref, name) {
 			axios.get(`${playlistHref}`)
 			.then((singlePlaylist) => {
 				data.content = singlePlaylist.data;
-				dispatch({ type: SEARCH_PLAYLIST, payload: data });
+			})
+			.then(() => {
+				axios.get(`${playlistHref}/tracks`)
+				.then((songs) => {
+					data.tracks = songs.data;
+					dispatch({ type: SEARCH_PLAYLIST, payload: data });
+				});
 			})
 			.then(() => {
 				browserHistory.push(`/playlist/${name}`);
