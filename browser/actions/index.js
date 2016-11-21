@@ -42,7 +42,7 @@ export function signin() {
 	};
 }
 
-export function searchPlaylist(playlistHref) {
+export function searchPlaylist(playlistHref, name) {
 	return (dispatch) => {
 		axios.get('/api/users/info')
 		.then((res) => {
@@ -51,9 +51,11 @@ export function searchPlaylist(playlistHref) {
 			axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
 			axios.get(`${playlistHref}`)
 			.then((singlePlaylist) => {
-				console.log('searching', singlePlaylist);
-				data.content = singlePlaylist;
+				data.content = singlePlaylist.data;
 				dispatch({ type: SEARCH_PLAYLIST, payload: data });
+			})
+			.then(() => {
+				browserHistory.push(`/playlist/${name}`);
 			});
 		}).catch(() => browserHistory.push('/login'));
 	};

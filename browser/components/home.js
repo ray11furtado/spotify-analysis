@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import * as actions from '../actions';
 
 require('../style/home.scss');
@@ -12,11 +11,15 @@ class Home extends Component {
 		this.props.signin();
 	}
 
-
+	displayContent() {
+		if (this.props.user.id) {
+			return <div>Home Page </div>;
+		} return <div className="loading" >Loading</div>;
+	}
 
 	render() {
 		return (
-			<div>Home Page</div>
+			<div>{this.displayContent()}</div>
 			);
 	}
 }
