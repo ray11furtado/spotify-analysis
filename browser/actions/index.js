@@ -4,7 +4,10 @@ import {
 	LOG_IN,
 	LOG_OUT,
 	SIGN_IN,
+	SEARCH_PLAYLIST,
  } from './types';
+
+const spotify = 'https://api.spotify.com'l
 
 export function login() {
 	return (dispatch) => {
@@ -29,7 +32,7 @@ export function signin() {
 		.then((res) => {
 				const data = res.data;
 				axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
-				axios.get(`https://api.spotify.com/v1/users/${data.spotify_id}/playlists`)
+				axios.get(`${spotify}/v1/users/${data.spotify_id}/playlists`)
 				.then(response => response.data.items)
 				.then((playlists) => {
 					data.playlists = playlists;
@@ -37,4 +40,20 @@ export function signin() {
 				});
 		}).catch(() => browserHistory.push('/login'));
 	};
+}
+
+export function searchPlaylist(playlistID) {
+	return (dispatch) => {
+		axios.get('/api/users/info')
+		.then((res) => {
+			const data = res.data;
+			data.type = 'playlist';
+			axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
+			axios.get(`${spotify}/v1/users/${data.spotify_id}/playlists${playlistId}`)
+			.then((singePlaylist) => {
+				data.content = singlePlaylist
+				dispatch({ type: SEARCH_PLAYLIST, payload: data })
+			})
+		}).catch(() => browserHistory.push('/login'));
+	} 
 }
