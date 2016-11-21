@@ -42,18 +42,19 @@ export function signin() {
 	};
 }
 
-export function searchPlaylist(playlistID) {
+export function searchPlaylist(playlistHref) {
 	return (dispatch) => {
 		axios.get('/api/users/info')
 		.then((res) => {
 			const data = res.data;
 			data.type = 'playlist';
 			axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
-			axios.get(`${spotify}/v1/users/${data.spotify_id}/playlists${playlistId}`)
-			.then((singePlaylist) => {
-				data.content = singlePlaylist
-				dispatch({ type: SEARCH_PLAYLIST, payload: data })
-			})
+			axios.get(`${playlistHref}`)
+			.then((singlePlaylist) => {
+				console.log('searching', singlePlaylist);
+				data.content = singlePlaylist;
+				dispatch({ type: SEARCH_PLAYLIST, payload: data });
+			});
 		}).catch(() => browserHistory.push('/login'));
-	} 
+	};
 }

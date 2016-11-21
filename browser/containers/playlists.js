@@ -15,6 +15,7 @@ class Playlists extends Component {
 	displayPlaylist() {
 		if (this.props.user.playlist[0]) {
 			const allPlaylist = this.props.user.playlist;
+			console.log(allPlaylist[0]);
 			return allPlaylist.map(singlePlaylist =>
 				<div key={singlePlaylist.snapshot_id} className="col-md-3 playlist-container">
 					<div className="container">
@@ -24,6 +25,7 @@ class Playlists extends Component {
 							alt="Playlist"
 							className="playlist-img"
 						/>
+						<button onClick={() => this.props.searchPlaylist(singlePlaylist.href)}>Analyze</button>
 					</div>
 				</div>,
 			);
