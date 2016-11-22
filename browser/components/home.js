@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
-require('../style/home.scss');
+import Loading from './loading';
 
 class Home extends Component {
 
@@ -14,7 +13,7 @@ class Home extends Component {
 	displayContent() {
 		if (this.props.user.id) {
 			return <div>Home Page </div>;
-		} return <div className="loading" >Loading</div>;
+		} return <Loading />;
 	}
 
 	render() {

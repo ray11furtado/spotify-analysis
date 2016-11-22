@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Loading from '../components/loading';
 
 class singePlaylist extends Component {
 	displayTitle() {
 		if (this.props.search.content) {
 			return <h2>{this.props.search.content.name}</h2>;
-		} return <h2>Loading Playlist...</h2>;
+		} return <div />;
 	}
 
 	displayTracks() {
@@ -15,7 +16,7 @@ class singePlaylist extends Component {
 			return songs.map(song =>
 				<div>{song.track.name}, {song.track.artists[0].name}</div>,
 			);
-		} return <div>Loading Tracks...</div>;
+		} return <Loading />;
 	}
 
 	render() {
