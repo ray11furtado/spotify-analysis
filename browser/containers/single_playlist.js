@@ -19,11 +19,13 @@ class singePlaylist extends Component {
 		} return <Loading />;
 	}
 
+
 	render() {
 		return (
 			<div>
 				{this.displayTitle()}
 				{this.displayTracks()}
+				<button onClick={this.props.searchSongs}>Search songs</button>
 			</div>
 			);
 	}

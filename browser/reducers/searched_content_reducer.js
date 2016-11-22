@@ -1,8 +1,9 @@
 import {
 	SEARCH_PLAYLIST,
+	SEARCH_SONG,
 } from '../actions/types';
 
-const INITIAL_STATE = { type: null, content: null, tracks: null };
+const INITIAL_STATE = { type: null, content: null, tracks: null, analyzed: null };
 
 export default function (state = INITIAL_STATE, action) {
 	switch (action.type) {
@@ -11,6 +12,10 @@ export default function (state = INITIAL_STATE, action) {
 				type: action.payload.type,
 				content: action.payload.content,
 				tracks: action.payload.tracks,
+			};
+		case SEARCH_SONG:
+			return { ...state,
+				analyzed: action.payload,
 			};
 		default:
 			return state;

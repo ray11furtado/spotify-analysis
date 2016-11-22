@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
+import LyricsKEY from '../config';
 import {
 	LOG_IN,
 	LOG_OUT,
 	SIGN_IN,
 	SEARCH_PLAYLIST,
+	SEARCH_SONG,
  } from './types';
 
 const spotify = 'https://api.spotify.com';
@@ -31,8 +33,10 @@ export function signin() {
 		axios.get('/api/users/info')
 		.then((res) => {
 				const data = res.data;
-				axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
-				axios.get(`${spotify}/v1/users/${data.spotify_id}/playlists`)
+				const axiosSpotify = axios.create({
+					headers: { 'Authorization': `Bearer ${data.access_token}` },
+				});
+				axiosSpotify.get(`${spotify}/v1/users/${data.spotify_id}/playlists`)
 				.then(response => response.data.items)
 				.then((playlists) => {
 					data.playlists = playlists;
@@ -48,13 +52,15 @@ export function searchPlaylist(playlistHref, name) {
 		.then((res) => {
 			const data = res.data;
 			data.type = 'playlist';
-			axios.defaults.headers.common.Authorization = `Bearer ${data.access_token}`;
-			axios.get(`${playlistHref}`)
+			const axiosSpotify = axios.create({
+				headers: { 'Authorization': `Bearer ${data.access_token}` },
+			});
+			axiosSpotify.get(`${playlistHref}`)
 			.then((singlePlaylist) => {
 				data.content = singlePlaylist.data;
 			})
 			.then(() => {
-				axios.get(`${playlistHref}/tracks`)
+				axiosSpotify.get(`${playlistHref}/tracks`)
 				.then((songs) => {
 					data.tracks = songs.data;
 					dispatch({ type: SEARCH_PLAYLIST, payload: data });
@@ -64,5 +70,16 @@ export function searchPlaylist(playlistHref, name) {
 				browserHistory.push(`/playlist/${name}`);
 			});
 		}).catch(() => browserHistory.push('/login'));
+	};
+}
+
+export function searchSongs() {
+	console.log('Searching Song...');
+	return (dispatch) => {
+		axios.get(`https://api.musixmatch.com/ws/1.1/matcher.track.get?format=jsonp&callback=callback&q_artist=taylor%20swift&q_track=mine&apikey=${LyricsKEY}`)
+		.then((res) => {
+			console.log(res);
+			dispatch({ type: SEARCH_SONG, payload: res });
+		});
 	};
 }
