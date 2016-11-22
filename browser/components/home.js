@@ -18,7 +18,7 @@ class Home extends Component {
 
 	render() {
 		return (
-			<div>{this.displayContent()}</div>
+			<div><Loading /></div>
 			);
 	}
 }
