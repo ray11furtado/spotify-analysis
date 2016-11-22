@@ -16,7 +16,7 @@ class Navbar extends Component {
 				<Link className="logout" onClick={() => this.props.logout()}>
 					Logout
 				</Link>
-				<span className="nav-item pull-right">
+				<span className="pull-right">
 						Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
 				</span>
 				</div>
