@@ -10,6 +10,7 @@ import {
  } from './types';
 
 const spotify = 'https://api.spotify.com';
+const MusixMatch = 'https://api.musixmatch.com/ws/1.1/';
 
 export function login() {
 	return (dispatch) => {
@@ -75,10 +76,14 @@ export function searchPlaylist(playlistHref, name) {
 
 export function searchSongs() {
 	console.log('Searching Song...');
+	const artist = 'Taylor Swift';
+	const songName = 'mine';
 	return (dispatch) => {
-		axios.get(`https://api.musixmatch.com/ws/1.1/matcher.track.get?format=jsonp&callback=callback&q_artist=taylor%20swift&q_track=mine&apikey=${LyricsKEY}`)
+		axios.get(`${MusixMatch}matcher.track.get?format=jsonp&callback=callback&q_artist=${artist}&q_track=${songName}&apikey=${LyricsKEY}`)
 		.then((res) => {
-			console.log(res);
+			const data = res.data;
+			const id = data.match(/"track_id":(\d+)/)[0].split(':')[1];
+			console.log(id);
 			dispatch({ type: SEARCH_SONG, payload: res });
 		});
 	};
