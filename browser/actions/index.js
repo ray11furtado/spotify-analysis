@@ -11,6 +11,7 @@ import {
 
 const spotify = 'https://api.spotify.com';
 const MusixMatch = 'https://api.musixmatch.com/ws/1.1/';
+const LyricAPI = `&apikey=${LyricsKEY}`;
 
 export function login() {
 	return (dispatch) => {
@@ -79,11 +80,26 @@ export function searchSongs() {
 	const artist = 'Taylor Swift';
 	const songName = 'mine';
 	return (dispatch) => {
-		axios.get(`${MusixMatch}matcher.track.get?format=jsonp&callback=callback&q_artist=${artist}&q_track=${songName}&apikey=${LyricsKEY}`)
+		axios.get(`${MusixMatch}matcher.track.get?format=jsonp&callback=callback&q_artist=${artist}&q_track=${songName}${LyricAPI}`)
 		.then((res) => {
 			const data = res.data;
 			const id = data.match(/"track_id":(\d+)/)[0].split(':')[1];
-			console.log(id);
+			axios.get(`${MusixMatch}track.lyrics.get?format=jsonp&callback=callback&track_id=${id}${LyricAPI}`)
+			.then((response) => {
+				const lyricData = response.data;
+				const lyrics = lyricData.match(/("lyrics_body":")(.[^\*\n])*/)[0].split(':')[1];
+				let result = '';
+				for (let i = 0; i < lyrics.length; i++) {
+					if (lyrics[i] === '\\' && lyrics[i + 1] === 'n') {
+						result += ' ';
+					} else if (lyrics[i] === 'n' && lyrics[i - 1] === '\\') {
+						result += ' ';
+					} else {
+						result += lyrics[i];
+					}
+				}
+			console.log(result);
+			});
 			dispatch({ type: SEARCH_SONG, payload: res });
 		});
 	};
