@@ -7,6 +7,7 @@ import {
 	SIGN_IN,
 	SEARCH_PLAYLIST,
 	SEARCH_SONG,
+	ANALYZE_SONG,
  } from './types';
 
 const spotify = 'https://api.spotify.com';
@@ -105,5 +106,12 @@ export function searchSongs(artist, songName) {
 				dispatch({ type: SEARCH_SONG, payload: songData });
 			});
 		});
+	};
+}
+
+export function analyzeLyrics(lyrics) {
+	return (dispatch) => {
+		console.log(lyrics);
+		dispatch({ type: ANALYZE_SONG });
 	};
 }
