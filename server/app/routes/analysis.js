@@ -10,12 +10,24 @@ const alchemy = watson.alchemy_language({ api_key: env.ALCHEMY_API });
 module.exports = Router;
 
 
-Router.post('/lyrics', (req, res) => {
-  console.log(req.body.lyrics);
+Router.post('/emotion', (req, res) => {
   const params = {
     text: req.body.lyrics,
   };
   alchemy.emotion(params, (err, response) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.send(response);
+    }
+  });
+});
+
+Router.post('/sentiment', (req, res) => {
+  const params = {
+    text: req.body.lyrics,
+  };
+  alchemy.sentiment(params, (err, response) => {
     if (err) {
       res.sendStatus(404);
     } else {
