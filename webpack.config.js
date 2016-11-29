@@ -1,3 +1,6 @@
+/* eslint-disable */
+var WebpackNotifer = require('webpack-notifier');
+
 module.exports = {
   entry: [
   './browser/index.js',
@@ -27,4 +30,7 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './',
   },
+  plugins: [
+    new WebpackNotifer(),
+  ]
 };
