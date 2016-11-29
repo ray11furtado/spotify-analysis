@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { musixAPI, meaningAPI } from '../config';
+import { musixAPI } from '../config';
 import {
 	LOG_IN,
 	LOG_OUT,
@@ -16,7 +16,7 @@ const spotify = 'https://api.spotify.com';
 const MusixMatch = 'https://api.musixmatch.com/ws/1.1/';
 const LyricAPI = `&apikey=${musixAPI}`;
 const format = 'format=jsonp&callback=callback';
-const alchemy = 'hello';
+
 
 export function login() {
 	return (dispatch) => {
@@ -122,9 +122,15 @@ export function searchSongs(artist, songName) {
 	};
 }
 
-export function analyzeLyrics(lyrics) {
+export function analyzeLyrics() {
 	return (dispatch) => {
-		console.log(lyrics);
+		const lyrics = 'You were in college, working part-time waiting tables left a small town never looked back';
+		axios.post('/api/analyze/lyrics', {
+			lyrics,
+		})
+		.then((res) => {
+			console.log(res);
+		});
 		dispatch({ type: ANALYZE_SONG });
 	};
 }

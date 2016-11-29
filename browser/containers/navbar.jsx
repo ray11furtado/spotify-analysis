@@ -19,6 +19,7 @@ class Navbar extends Component {
 				<span className="pull-right">
 						Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
 				</span>
+				<button onClick={() => this.props.analyzeLyrics()}> Analyze Test </button>
 				</div>
 				);
 		}
@@ -40,4 +41,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, actions)(Navbar);
-

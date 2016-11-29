@@ -10,15 +10,15 @@ const alchemy = watson.alchemy_language({ api_key: env.ALCHEMY_API });
 module.exports = Router;
 
 
-Router.get('/lyrics', (req, res) => {
+Router.post('/lyrics', (req, res) => {
+  console.log(req.body.lyrics);
   const params = {
-    text: 'wondering why we ever bother with love if it never lasts, say can you believe it as we are lying on the couch. Do you remember we were sitting there by the water you put your arm around me for the first time',
+    text: req.body.lyrics,
   };
   alchemy.emotion(params, (err, response) => {
     if (err) {
-      console.log(err);
+      res.sendStatus(404);
     } else {
-      console.log(response);
       res.send(response);
     }
   });
