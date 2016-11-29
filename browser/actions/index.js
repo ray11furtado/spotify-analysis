@@ -76,11 +76,9 @@ export function searchPlaylist(playlistHref, name) {
 	};
 }
 
-export function searchSongs() {
+export function searchSongs(artist, songName) {
 	console.log('Searching Song...');
 	const songData = {};
-	const artist = 'Taylor Swift';
-	const songName = 'mine';
 	songData.artist = artist;
 	songData.songName = songName;
 	return (dispatch) => {
