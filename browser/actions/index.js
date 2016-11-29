@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import LyricsKEY from '../config';
+import { musixAPI, meaningAPI } from '../config';
 import {
 	LOG_IN,
 	LOG_OUT,
@@ -11,7 +11,8 @@ import {
 
 const spotify = 'https://api.spotify.com';
 const MusixMatch = 'https://api.musixmatch.com/ws/1.1/';
-const LyricAPI = `&apikey=${LyricsKEY}`;
+const LyricAPI = `&apikey=${musixAPI}`;
+const format = 'format=jsonp&callback=callback';
 
 export function login() {
 	return (dispatch) => {
@@ -77,14 +78,17 @@ export function searchPlaylist(playlistHref, name) {
 
 export function searchSongs() {
 	console.log('Searching Song...');
+	const songData = {};
 	const artist = 'Taylor Swift';
 	const songName = 'mine';
+	songData.artist = artist;
+	songData.songName = songName;
 	return (dispatch) => {
-		axios.get(`${MusixMatch}matcher.track.get?format=jsonp&callback=callback&q_artist=${artist}&q_track=${songName}${LyricAPI}`)
+		axios.get(`${MusixMatch}matcher.track.get?${format}&q_artist=${artist}&q_track=${songName}${LyricAPI}`)
 		.then((res) => {
 			const data = res.data;
 			const id = data.match(/"track_id":(\d+)/)[0].split(':')[1];
-			axios.get(`${MusixMatch}track.lyrics.get?format=jsonp&callback=callback&track_id=${id}${LyricAPI}`)
+			axios.get(`${MusixMatch}track.lyrics.get?${format}&track_id=${id}${LyricAPI}`)
 			.then((response) => {
 				const lyricData = response.data;
 				const lyrics = lyricData.match(/("lyrics_body":")(.[^\*\n])*/)[0].split(':')[1];
@@ -93,14 +97,15 @@ export function searchSongs() {
 					if (lyrics[i] === '\\' && lyrics[i + 1] === 'n') {
 						result += ' ';
 					} else if (lyrics[i] === 'n' && lyrics[i - 1] === '\\') {
-						result += ' ';
+						result += '';
 					} else {
 						result += lyrics[i];
 					}
 				}
-			console.log(result);
+				console.log(result);
+				songData.lyrics = result;
+				dispatch({ type: SEARCH_SONG, payload: songData });
 			});
-			dispatch({ type: SEARCH_SONG, payload: res });
 		});
 	};
 }
