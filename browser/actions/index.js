@@ -11,10 +11,12 @@ import {
 	LYRICS_ERROR,
  } from './types';
 
+
 const spotify = 'https://api.spotify.com';
 const MusixMatch = 'https://api.musixmatch.com/ws/1.1/';
 const LyricAPI = `&apikey=${musixAPI}`;
 const format = 'format=jsonp&callback=callback';
+const alchemy = 'hello';
 
 export function login() {
 	return (dispatch) => {
