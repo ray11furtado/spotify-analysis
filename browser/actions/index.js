@@ -8,6 +8,7 @@ import {
 	SEARCH_PLAYLIST,
 	SEARCH_SONG,
 	ANALYZE_SONG,
+	LYRICS_ERROR,
  } from './types';
 
 const spotify = 'https://api.spotify.com';
@@ -77,6 +78,13 @@ export function searchPlaylist(playlistHref, name) {
 	};
 }
 
+export function noLyrics(error) {
+	return {
+		type: LYRICS_ERROR,
+		payload: error,
+	};
+}
+
 export function searchSongs(artist, songName) {
 	console.log('Searching Song...');
 	const songData = {};
@@ -104,6 +112,9 @@ export function searchSongs(artist, songName) {
 				console.log(result);
 				songData.lyrics = result;
 				dispatch({ type: SEARCH_SONG, payload: songData });
+			})
+			.catch(() => {
+				dispatch(noLyrics(`Lyrics not found for ${songName}`));
 			});
 		});
 	};

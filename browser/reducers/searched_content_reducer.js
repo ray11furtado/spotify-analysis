@@ -1,7 +1,4 @@
-import {
-	SEARCH_PLAYLIST,
-	SEARCH_SONG,
-} from '../actions/types';
+import { SEARCH_PLAYLIST } from '../actions/types';
 
 const INITIAL_STATE = { type: null, content: null, tracks: null, analyzed: null };
 
