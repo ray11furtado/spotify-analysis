@@ -13,10 +13,6 @@ export default function (state = INITIAL_STATE, action) {
 				content: action.payload.content,
 				tracks: action.payload.tracks,
 			};
-		case SEARCH_SONG:
-			return { ...state,
-				analyzed: action.payload,
-			};
 		default:
 			return state;
 	}
