@@ -125,12 +125,21 @@ export function searchSongs(artist, songName) {
 export function analyzeLyrics() {
 	return (dispatch) => {
 		const lyrics = 'You were in college, working part-time waiting tables left a small town never looked back';
-		axios.post('/api/analyze/emotion', {
-			lyrics,
-		})
-		.then((res) => {
-			console.log(res);
-		});
+		function analyzeEmotion() {
+			return axios.post('/api/analyze/emotion', {
+				lyrics,
+			});
+		}
+		function analyzeSentiment() {
+			return axios.post('/api/analyze/sentiment', {
+				lyrics,
+			});
+		}
+		axios.all([analyzeEmotion(), analyzeSentiment()])
+		.then(axios.spread((emotion, sentiment) => {
+			console.log(emotion.data);
+			console.log(sentiment.data);
+		}));
 		dispatch({ type: ANALYZE_SONG });
 	};
 }
