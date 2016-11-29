@@ -6,7 +6,7 @@ import {
 	LOG_OUT,
 	SIGN_IN,
 	SEARCH_PLAYLIST,
-	SEARCH_SONG,
+	GET_LYRICS,
 	ANALYZE_SONG,
 	LYRICS_ERROR,
  } from './types';
@@ -87,7 +87,7 @@ export function noLyrics(error) {
 	};
 }
 
-export function searchSongs(artist, songName) {
+export function searchSongs(songName, artist) {
 	console.log('Searching Song...');
 	const songData = {};
 	songData.artist = artist;
@@ -111,9 +111,9 @@ export function searchSongs(artist, songName) {
 						result += lyrics[i];
 					}
 				}
-				console.log(result);
 				songData.lyrics = result;
-				dispatch({ type: SEARCH_SONG, payload: songData });
+				console.log(songData.lyrics);
+				dispatch({ type: GET_LYRICS, payload: songData });
 			})
 			.catch(() => {
 				dispatch(noLyrics(`Lyrics not found for ${songName}`));
@@ -122,9 +122,9 @@ export function searchSongs(artist, songName) {
 	};
 }
 
-export function analyzeLyrics() {
+export function analyzeLyrics(lyrics) {
+	const data = {};
 	return (dispatch) => {
-		const lyrics = 'You were in college, working part-time waiting tables left a small town never looked back';
 		function analyzeEmotion() {
 			return axios.post('/api/analyze/emotion', {
 				lyrics,
@@ -137,9 +137,9 @@ export function analyzeLyrics() {
 		}
 		axios.all([analyzeEmotion(), analyzeSentiment()])
 		.then(axios.spread((emotion, sentiment) => {
-			console.log(emotion.data);
-			console.log(sentiment.data);
+			data.emotion = emotion.data.docEmotions;
+			data.sentiment = sentiment.data.docSentiment;
 		}));
-		dispatch({ type: ANALYZE_SONG });
+		dispatch({ type: ANALYZE_SONG, payload: data });
 	};
 }
