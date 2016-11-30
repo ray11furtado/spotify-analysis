@@ -5,6 +5,7 @@ import Home from './components/home';
 import Login from './components/login';
 import Playlists from './containers/playlists';
 import Playlist from './containers/single_playlist';
+import SongAnalysis from './containers/song_analysis';
 import Auth from './components/auth';
 
 export default (
@@ -13,5 +14,6 @@ export default (
 		<Route path="home" component={Auth(Home)} />
 		<Route path="/playlist" component={Auth(Playlists)} />
 		<Route path="/playlist/:name" component={Auth(Playlist)} />
+		<Route path="/analyze/:song" component={Auth(SongAnalysis)} />
 	</Route>
 );

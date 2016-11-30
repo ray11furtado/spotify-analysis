@@ -80,7 +80,7 @@ export function searchPlaylist(playlistHref, name) {
 	};
 }
 
-export function noLyrics(error) {
+export function notFound(error) {
 	return {
 		type: LYRICS_ERROR,
 		payload: error,
@@ -116,13 +116,13 @@ export function searchSongs(songName, artist) {
 				dispatch({ type: GET_LYRICS, payload: songData });
 			})
 			.catch(() => {
-				dispatch(noLyrics(`Lyrics not found for ${songName}`));
+				dispatch(notFound(`Lyrics not found for ${songName}`));
 			});
 		});
 	};
 }
 
-export function analyzeLyrics(lyrics) {
+export function analyzeLyrics(songName, lyrics) {
 	const data = {};
 	return (dispatch) => {
 		function analyzeEmotion() {
@@ -139,7 +139,13 @@ export function analyzeLyrics(lyrics) {
 		.then(axios.spread((emotion, sentiment) => {
 			data.emotion = emotion.data.docEmotions;
 			data.sentiment = sentiment.data.docSentiment;
-		}));
-		dispatch({ type: ANALYZE_SONG, payload: data });
+			dispatch({ type: ANALYZE_SONG, payload: data });
+		}))
+		.then(() => {
+			browserHistory.push(`/analyze/${songName}`);
+		})
+		.catch(() => {
+			dispatch(notFound(`Analysis Failed for ${songName}`));
+		});
 	};
 }
