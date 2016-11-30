@@ -4,13 +4,13 @@ import {
   GET_LYRICS,
 } from '../actions/types';
 
-const INITIAL_STATE = { songData: null, emotion: null, sentiment: null, error: null };
+const INITIAL_STATE = { lyrics: null, emotion: null, sentiment: null, error: null };
 
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case GET_LYRICS:
       return { ...state,
-            songData: action.payload,
+            lyrics: action.payload,
           };
     case ANALYZE_SONG:
       return { ...state,

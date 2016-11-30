@@ -88,10 +88,6 @@ export function notFound(error) {
 }
 
 export function searchSongs(songName, artist) {
-	console.log('Searching Song...');
-	const songData = {};
-	songData.artist = artist;
-	songData.songName = songName;
 	return (dispatch) => {
 		axios.get(`${MusixMatch}matcher.track.get?${format}&q_artist=${artist}&q_track=${songName}${LyricAPI}`)
 		.then((res) => {
@@ -111,9 +107,10 @@ export function searchSongs(songName, artist) {
 						result += lyrics[i];
 					}
 				}
-				songData.lyrics = result;
-				console.log(songData.lyrics);
-				dispatch({ type: GET_LYRICS, payload: songData });
+				dispatch({ type: GET_LYRICS, payload: result });
+			})
+			.then(() => {
+				browserHistory.push(`/analyze/${artist}/${songName}`);
 			})
 			.catch(() => {
 				dispatch(notFound(`Lyrics not found for ${songName}`));
@@ -122,7 +119,7 @@ export function searchSongs(songName, artist) {
 	};
 }
 
-export function analyzeLyrics(songName, lyrics) {
+export function analyzeLyrics(lyrics) {
 	const data = {};
 	return (dispatch) => {
 		function analyzeEmotion() {
@@ -139,13 +136,11 @@ export function analyzeLyrics(songName, lyrics) {
 		.then(axios.spread((emotion, sentiment) => {
 			data.emotion = emotion.data.docEmotions;
 			data.sentiment = sentiment.data.docSentiment;
+			console.log('Analyzing');
 			dispatch({ type: ANALYZE_SONG, payload: data });
 		}))
-		.then(() => {
-			browserHistory.push(`/analyze/${songName}`);
-		})
 		.catch(() => {
-			dispatch(notFound(`Analysis Failed for ${songName}`));
+			dispatch(notFound('Analysis Failed'));
 		});
 	};
 }

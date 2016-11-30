@@ -12,8 +12,8 @@ export default (
 	<Route path="/" component={Auth(App)}>
 		<Route path="login" component={Login} />
 		<Route path="home" component={Auth(Home)} />
+		<Route path="/analyze/:artist/:song" component={Auth(SongAnalysis)} />
 		<Route path="/playlist" component={Auth(Playlists)} />
 		<Route path="/playlist/:name" component={Auth(Playlist)} />
-		<Route path="/analyze/:song" component={Auth(SongAnalysis)} />
 	</Route>
 );

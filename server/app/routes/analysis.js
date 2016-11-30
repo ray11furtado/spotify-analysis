@@ -18,7 +18,7 @@ Router.post('/emotion', (req, res) => {
     if (err) {
       res.sendStatus(404);
     } else {
-      res.send(response);
+      res.send(response).status(200);
     }
   });
 });

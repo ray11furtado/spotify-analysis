@@ -5,7 +5,6 @@ import * as actions from '../actions';
 
 require('../style/navbar.scss');
 
-const l = 'You were in college, working part-time waiting tables left a small town never looked back'
 
 class Navbar extends Component {
 
@@ -21,7 +20,6 @@ class Navbar extends Component {
 				<span className="pull-right">
 						Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
 				</span>
-				<button onClick={() => this.props.analyzeLyrics(l)}> Analyze Test </button>
 				</div>
 				);
 		}

@@ -13,7 +13,7 @@ Router.get('/info', (req, res, next) => {
 		},
 	})
 	.then(user => res.send(user))
-	.then(() => res.send(200))
+	.then(() => res.status(200))
 	.catch(() => next());
 });
 
