@@ -20,6 +20,7 @@ class Navbar extends Component {
 				<span className="pull-right">
 						Spotify Account: <span className="account">{this.props.user.spotify_id}</span>
 				</span>
+				<Link to="test">test </Link>
 				</div>
 				);
 		}

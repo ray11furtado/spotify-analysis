@@ -12,6 +12,7 @@ class songAnalysis extends Component {
   }
 
   loading() {
+    console.dir(this.props);
     if (!this.props.song.emotion && !this.props.song.sentiment) {
       return (
         <div>

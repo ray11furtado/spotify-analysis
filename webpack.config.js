@@ -1,5 +1,5 @@
 /* eslint-disable */
-var WebpackNotifer = require('webpack-notifier');
+var WebpackBuildNotifier = require('webpack-build-notifier');
 
 module.exports = {
   entry: [
@@ -31,6 +31,10 @@ module.exports = {
     contentBase: './',
   },
   plugins: [
-    new WebpackNotifer(),
+    new WebpackBuildNotifier({
+      title: "WebpackBuild",
+      sucessSound: true,
+      failureSound: true,
+    }),
   ]
 };
