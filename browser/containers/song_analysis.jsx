@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import
-{ VictoryBar,
-  VictoryTheme,
-  VictoryChart,
-  VictoryAxis,
- } from 'victory';
 import * as actions from '../actions';
+import EmotionGraph from '../components/emotion_graph';
 import Loading from '../components/loading';
-
-const lyricz = 'It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair, we had everything before us, we had nothing before us, we were all going direct to Heaven, we were all going direct the other way--in short, the period was so far like the present period, that some of its noisiest authorities insisted on its being received, for good or for evil, in the superlative degree of comparison only.';
 
 class songAnalysis extends Component {
 
@@ -27,37 +20,7 @@ class songAnalysis extends Component {
         </div>
       );
     }
-    return (<div>
-      <VictoryChart
-        domainPadding={20}
-      >
-        <VictoryAxis
-          tickValues={['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness']}
-          style={{
-            axis: { stroke: 'whitesmoke' },
-            tickLabels: { fontSize: 16, padding: 5, fill: 'whitesmoke' },
-          }}
-        />
-      <VictoryAxis
-        dependentAxis
-        tickValues={[0, 0.25, 0.50, 0.75, 1.0]}
-        style={{
-          axis: { stroke: 'whitesmoke' },
-          grid: { stroke: 'whitesmoke' },
-          tickLabels: { fontSize: 16, padding: 5, fill: 'whitesmoke' },
-        }}
-      />
-        <VictoryBar
-          data={this.props.song.emotion}
-          style={{
-            data: { fill: d => d.y > 0.5 ? '#5cb85c' : '#d9534f' },
-          }}
-          x="emotion"
-          y="score"
-        />
-      </VictoryChart>
-    </div>
-    );
+    return <EmotionGraph emotion={this.props.song.emotion} />;
   }
 
 
