@@ -139,15 +139,15 @@ export function analyzeLyrics(lyrics) {
 			for (const property in emotion.data.docEmotions) {
 				const score = parseFloat(emotion.data.docEmotions[property]);
 				if (property === 'anger') {
-					emotions.push({ emotion: 'anger', score });
+					emotions.push({ emotion: 'Anger', score });
 				} else if (property === 'disgust') {
-					emotions.push({ emotion: 'disgust', score });
+					emotions.push({ emotion: 'Disgust', score });
 				} else if (property === 'fear') {
-					emotions.push({ emotion: 'fear', score });
+					emotions.push({ emotion: 'Fear', score });
 				} else if (property === 'joy') {
-					emotions.push({ emotion: 'joy', score });
+					emotions.push({ emotion: 'Joy', score });
 				} else if (property === 'sadness') {
-					emotions.push({ emotion: 'sadness', score });
+					emotions.push({ emotion: 'Sadness', score });
 				}
 			}
 			for (const prop in sentiment.data.docSentiment) {

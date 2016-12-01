@@ -17,5 +17,11 @@ export default () => (
 		<h6 className="port">
 			This is app intended for Portfolio Purposes
 		</h6>
+		<h6>
+			No Spotify{'?'} Continue As Guset
+		</h6>
+		<button className="btn-sm btn-success">
+			Guest
+		</button>
 	</div>
 );

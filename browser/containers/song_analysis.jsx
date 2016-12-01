@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import
+{ VictoryBar,
+  VictoryTheme,
+  VictoryChart,
+  VictoryAxis,
+ } from 'victory';
 import * as actions from '../actions';
 import Loading from '../components/loading';
 
@@ -20,15 +26,38 @@ class songAnalysis extends Component {
           <Loading />
         </div>
       );
-    } else if (!this.props.song.graph) {
-      return (
-        <div>
-          <h3 className="text-center">Building Graph!!</h3>
-          <Loading />
-        </div>
-      );
     }
-    return <div>Hello</div>;
+    return (<div>
+      <VictoryChart
+        domainPadding={20}
+      >
+        <VictoryAxis
+          tickValues={['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness']}
+          style={{
+            axis: { stroke: 'whitesmoke' },
+            tickLabels: { fontSize: 16, padding: 5, fill: 'whitesmoke' },
+          }}
+        />
+      <VictoryAxis
+        dependentAxis
+        tickValues={[0, 0.25, 0.50, 0.75, 1.0]}
+        style={{
+          axis: { stroke: 'whitesmoke' },
+          grid: { stroke: 'whitesmoke' },
+          tickLabels: { fontSize: 16, padding: 5, fill: 'whitesmoke' },
+        }}
+      />
+        <VictoryBar
+          data={this.props.song.emotion}
+          style={{
+            data: { fill: d => d.y > 0.5 ? '#5cb85c' : '#d9534f' },
+          }}
+          x="emotion"
+          y="score"
+        />
+      </VictoryChart>
+    </div>
+    );
   }
 
 
@@ -38,6 +67,7 @@ class songAnalysis extends Component {
       <div>
         <h3>{this.props.params.artist}</h3>
         <h4>{this.props.params.song}</h4>
+        <div>{this.loading()}</div>
       </div>
     );
   }
