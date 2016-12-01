@@ -13,7 +13,6 @@ class singePlaylist extends Component {
 	}
 
 	displayTracks() {
-		console.dir(this.props);
 		if (this.props.search.tracks) {
 			const songs = this.props.search.tracks.items;
 			return songs.map(song =>

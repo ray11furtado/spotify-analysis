@@ -33,6 +33,7 @@ class songAnalysis extends Component {
 
 
   songInfo() {
+    console.dir(this.props);
     return (
       <div>
         <h3>{this.props.params.artist}</h3>
@@ -44,7 +45,7 @@ class songAnalysis extends Component {
   render() {
     return (
       <div>
-        <div>{this.loading()}</div>
+        <div>{this.songInfo()}</div>
       </div>
 
     );

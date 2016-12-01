@@ -9,6 +9,8 @@
     "no-undef": 0,
     "new-cap": 0,
     "quote-props": 0,
+    "guard-for-in": 0,
+    "no-restricer-syntax": 0,
     "react/jsx-indent-props" : 0,
     "react/prop-types":0,
     "jsx-a11y/no-static-element-interactions": 1,

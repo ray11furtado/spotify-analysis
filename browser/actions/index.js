@@ -134,9 +134,34 @@ export function analyzeLyrics(lyrics) {
 		}
 		axios.all([analyzeEmotion(), analyzeSentiment()])
 		.then(axios.spread((emotion, sentiment) => {
-			data.emotion = emotion.data.docEmotions;
-			data.sentiment = sentiment.data.docSentiment;
-			console.log('Analyzing');
+			const emotions = [];
+			const sentiments = [];
+			for (const property in emotion.data.docEmotions) {
+				const score = parseFloat(emotion.data.docEmotions[property]);
+				if (property === 'anger') {
+					emotions.push({ emotion: 'anger', score });
+				} else if (property === 'disgust') {
+					emotions.push({ emotion: 'disgust', score });
+				} else if (property === 'fear') {
+					emotions.push({ emotion: 'fear', score });
+				} else if (property === 'joy') {
+					emotions.push({ emotion: 'joy', score });
+				} else if (property === 'sadness') {
+					emotions.push({ emotion: 'sadness', score });
+				}
+			}
+			for (const prop in sentiment.data.docSentiment) {
+				const info = sentiment.data.docSentiment[prop];
+				if (prop === 'mixed') {
+					sentiments.push({ type: 'mixed', info });
+				} else if (prop === 'score') {
+					sentiments.push({ type: 'score', info });
+				} else if (prop === 'type') {
+					sentiments.push({ type: 'sentiment', info });
+				}
+			}
+			data.emotions = emotions;
+			data.sentiments = sentiments;
 			dispatch({ type: ANALYZE_SONG, payload: data });
 		}))
 		.catch(() => {
