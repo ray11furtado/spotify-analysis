@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import EmotionGraph from '../components/emotion_graph';
+import SentimentGraph from '../components/sentiment_graph';
 import Loading from '../components/loading';
+
+require('../style/graphs.scss');
 
 class songAnalysis extends Component {
 
@@ -10,27 +13,29 @@ class songAnalysis extends Component {
     this.props.analyzeLyrics(this.props.song.lyrics);
   }
 
-  loading() {
-    console.dir(this.props);
+  buildGraphs() {
     if (!this.props.song.emotion && !this.props.song.sentiment) {
       return (
         <div>
-          <h3 className="text-center">Analyzing Lyrics!!</h3>
+          <h3 className="text-center">Analyzing Lyrics & Building Graphs!!!</h3>
           <Loading />
         </div>
       );
     }
-    return <EmotionGraph emotion={this.props.song.emotion} />;
+    return (
+      <div>
+        <EmotionGraph emotion={this.props.song.emotion} />
+        <SentimentGraph sentiment={this.props.song.sentiment} />
+      </div>
+    );
   }
 
-
   songInfo() {
-    console.dir(this.props);
     return (
       <div>
         <h3>{this.props.params.artist}</h3>
         <h4>{this.props.params.song}</h4>
-        <div>{this.loading()}</div>
+        <div>{this.buildGraphs()}</div>
       </div>
     );
   }
@@ -40,7 +45,6 @@ class songAnalysis extends Component {
       <div>
         <div>{this.songInfo()}</div>
       </div>
-
     );
   }
 }

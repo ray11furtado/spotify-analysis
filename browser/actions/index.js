@@ -120,6 +120,11 @@ export function searchSongs(songName, artist) {
 }
 
 export function analyzeLyrics(lyrics) {
+	if (lyrics <= 10) {
+		return (dispatch) => {
+			dispatch({ type: ANALYZE_SONG, payload: undefined });
+		};
+	}
 	const data = {};
 	return (dispatch) => {
 		function analyzeEmotion() {
@@ -136,30 +141,12 @@ export function analyzeLyrics(lyrics) {
 		.then(axios.spread((emotion, sentiment) => {
 			const emotions = [];
 			const sentiments = [];
-			for (const property in emotion.data.docEmotions) {
-				const score = parseFloat(emotion.data.docEmotions[property]);
-				if (property === 'anger') {
-					emotions.push({ emotion: 'Anger', score });
-				} else if (property === 'disgust') {
-					emotions.push({ emotion: 'Disgust', score });
-				} else if (property === 'fear') {
-					emotions.push({ emotion: 'Fear', score });
-				} else if (property === 'joy') {
-					emotions.push({ emotion: 'Joy', score });
-				} else if (property === 'sadness') {
-					emotions.push({ emotion: 'Sadness', score });
-				}
-			}
-			for (const prop in sentiment.data.docSentiment) {
-				const info = sentiment.data.docSentiment[prop];
-				if (prop === 'mixed') {
-					sentiments.push({ type: 'mixed', info });
-				} else if (prop === 'score') {
-					sentiments.push({ type: 'score', info });
-				} else if (prop === 'type') {
-					sentiments.push({ type: 'sentiment', info });
-				}
-			}
+			emotions.push({ emotion: 'Anger', score: parseFloat(emotion.data.docEmotions.anger) });
+			emotions.push({ emotion: 'Disgust', score: parseFloat(emotion.data.docEmotions.disgust) });
+			emotions.push({ emotion: 'Fear', score: parseFloat(emotion.data.docEmotions.fear) });
+			emotions.push({ emotion: 'Joy', score: parseFloat(emotion.data.docEmotions.joy) });
+			emotions.push({ emotion: 'Sadness', score: parseFloat(emotion.data.docEmotions.sadness) });
+			sentiments.push({ score: parseFloat(sentiment.data.docSentiment.score) });
 			data.emotions = emotions;
 			data.sentiments = sentiments;
 			dispatch({ type: ANALYZE_SONG, payload: data });

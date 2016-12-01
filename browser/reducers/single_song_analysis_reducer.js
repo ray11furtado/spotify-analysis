@@ -13,7 +13,6 @@ export default function (state = INITIAL_STATE, action) {
             lyrics: action.payload,
           };
     case ANALYZE_SONG:
-    console.log(action.payload);
       return { ...state,
             emotion: action.payload.emotions,
             sentiment: action.payload.sentiments,

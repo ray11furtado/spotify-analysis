@@ -3,6 +3,7 @@ import
 { VictoryBar,
   VictoryChart,
   VictoryAxis,
+  VictoryLabel,
  } from 'victory';
 
 export default props => (
@@ -10,11 +11,20 @@ export default props => (
     <VictoryChart
       domainPadding={20}
     >
+    <VictoryLabel
+      x={150} y={45}
+      text="Emotional Analysis"
+      style={{
+        fill: 'ghostwhite',
+        fontSize: 16,
+        fontWeight: 'bold',
+      }}
+    />
       <VictoryAxis
         tickValues={['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness']}
         style={{
-          axis: { stroke: 'whitesmoke' },
-          tickLabels: { fontSize: 16, padding: 5, fill: 'whitesmoke' },
+          axis: { stroke: 'ghostwhite' },
+          tickLabels: { fontSize: 14, padding: 5, fill: 'ghostwhite' },
         }}
       />
     <VictoryAxis
@@ -23,7 +33,7 @@ export default props => (
       style={{
         axis: { stroke: 'whitesmoke' },
         grid: { stroke: 'whitesmoke' },
-        tickLabels: { fontSize: 16, padding: 5, fill: 'whitesmoke' },
+        tickLabels: { fontSize: 14, padding: 5, fill: 'whitesmoke' },
       }}
     />
       <VictoryBar
