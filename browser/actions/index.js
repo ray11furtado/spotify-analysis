@@ -107,6 +107,7 @@ export function searchSongs(songName, artist) {
 						result += lyrics[i];
 					}
 				}
+				console.log(result);
 				dispatch({ type: GET_LYRICS, payload: result });
 			})
 			.then(() => {
