@@ -8,7 +8,7 @@ require('../style/search_song.scss');
 class Home extends Component {
 	constructor() {
 		super();
-		this.state = { songName: '', artist: '' };
+		this.state = { songName: undefined, artist: undefined };
 		this.onSongChange = this.onSongChange.bind(this);
 		this.onArtistChange = this.onArtistChange.bind(this);
 	}
@@ -49,6 +49,7 @@ class Home extends Component {
 			<span className="input-group-btn">
 				<button
 					className="btn btn-success"
+					disabled={!this.state.songName || !this.state.artist}
 					onClick={() => this.props.searchSongs(this.state.songName, this.state.artist).bind(this)}
 				>
 					Submit
