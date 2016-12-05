@@ -9,6 +9,8 @@ import {
 	GET_LYRICS,
 	ANALYZE_SONG,
 	LYRICS_ERROR,
+	GUEST_LOGIN,
+	GUEST_LOGOUT,
  } from './types';
 
 
@@ -52,6 +54,21 @@ export function signin() {
 		}).catch(() => browserHistory.push('/login'));
 	};
 }
+
+export function guestLogin() {
+	console.log('Guest Login');
+	return (dispatch) => {
+		dispatch({ type: GUEST_LOGIN, payload: true });
+		browserHistory.push('/guest');
+	};
+}
+
+export function guestLogout() {
+	return (dispatch) => {
+		dispatch({ type: GUEST_LOGOUT, payload: false });
+	};
+}
+
 
 export function searchPlaylist(playlistHref, name) {
 	return (dispatch) => {
@@ -107,7 +124,6 @@ export function searchSongs(songName, artist) {
 						result += lyrics[i];
 					}
 				}
-				console.log(result);
 				dispatch({ type: GET_LYRICS, payload: result });
 			})
 			.then(() => {
@@ -116,6 +132,17 @@ export function searchSongs(songName, artist) {
 			.catch(() => {
 				dispatch(notFound(`Lyrics not found for ${songName}`));
 			});
+		});
+	};
+}
+
+export function guestSearch(songName, artist) {
+	return (dispatch, getState) => {
+		const { guest } = getState();
+		searchSongs(songName, artist)
+		.then(() => {
+			const count = guest.count++;
+			dispatch({ type: GUEST_SEARCH, payload: count });
 		});
 	};
 }

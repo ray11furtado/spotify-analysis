@@ -5,3 +5,6 @@ export const SEARCH_PLAYLIST = 'search_playlist';
 export const GET_LYRICS = 'search_song';
 export const ANALYZE_SONG = 'analyze_song';
 export const LYRICS_ERROR = 'lyrics_error';
+export const GUEST_LOGIN = 'guest-login';
+export const GUEST_LOGOUT = 'guest-logout';
+export const GUEST_SEARCH = 'guest_search';
