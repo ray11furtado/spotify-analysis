@@ -1,62 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import SearchBar from './search_bar';
 import Loading from './loading';
 
 require('../style/search_song.scss');
 
 class Home extends Component {
-	constructor() {
-		super();
-		this.state = { songName: undefined, artist: undefined };
-		this.onSongChange = this.onSongChange.bind(this);
-		this.onArtistChange = this.onArtistChange.bind(this);
-	}
+
 	componentWillMount() {
 		this.props.login();
 		this.props.signin();
 	}
 
-	onSongChange(event) {
-		this.setState({ songName: event.target.value });
-	}
-
-	onArtistChange(event) {
-		this.setState({ artist: event.target.value });
-	}
-
 	displayContent() {
 		if (this.props.user.id) {
-			return <div>{this.searchBar()} </div>;
+			return <SearchBar />;
 		} return <Loading />;
-	}
-
-	searchBar() {
-		return (
-			<div
-				className="search-song input-group"
-			>
-				<input
-					className="form-control"
-					placeholder="Song Name"
-					onChange={this.onSongChange}
-				/>
-				<input
-					className="form-control"
-					placeholder="Artist"
-					onChange={this.onArtistChange}
-				/>
-			<span className="input-group-btn">
-				<button
-					className="btn btn-success"
-					disabled={!this.state.songName || !this.state.artist}
-					onClick={() => this.props.searchSongs(this.state.songName, this.state.artist).bind(this)}
-				>
-					Submit
-				</button>
-			</span>
-		</div>
-		);
 	}
 
 	render() {

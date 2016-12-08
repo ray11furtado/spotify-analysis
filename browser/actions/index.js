@@ -66,6 +66,7 @@ export function guestLogin() {
 export function guestLogout() {
 	return (dispatch) => {
 		dispatch({ type: GUEST_LOGOUT, payload: false });
+		browserHistory.push('/login');
 	};
 }
 
@@ -105,7 +106,8 @@ export function notFound(error) {
 }
 
 export function searchSongs(songName, artist) {
-	return (dispatch) => {
+	return (dispatch, getState) => {
+		const { guest } = getState();
 		axios.get(`${MusixMatch}matcher.track.get?${format}&q_artist=${artist}&q_track=${songName}${LyricAPI}`)
 		.then((res) => {
 			const data = res.data;
@@ -127,7 +129,9 @@ export function searchSongs(songName, artist) {
 				dispatch({ type: GET_LYRICS, payload: result });
 			})
 			.then(() => {
-				browserHistory.push(`/analyze/${artist}/${songName}`);
+				if (guest.login) {
+					browserHistory.push(`/guest/analyze/${artist}/${songName}`);
+				} else browserHistory.push(`/analyze/${artist}/${songName}`);
 			})
 			.catch(() => {
 				dispatch(notFound(`Lyrics not found for ${songName}`));

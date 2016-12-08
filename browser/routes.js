@@ -6,7 +6,7 @@ import Login from './components/login';
 import Playlists from './containers/playlists';
 import Playlist from './containers/single_playlist';
 import SongAnalysis from './containers/song_analysis';
-import Guest from './containers/guest';
+import Guest from './containers/guest_home';
 import Auth from './components/auth';
 import gAuth from './components/guest_auth';
 
