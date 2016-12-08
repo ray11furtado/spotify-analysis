@@ -6,9 +6,15 @@ require('../style/navbar.scss');
 
 function guestNav(props) {
   return (
-    <div className="mynav">
-      <h4 className="account">Welcome Guest</h4>
-      <button className="logout" onClick={() => props.guestLogout}>Logout</button>
+    <div className="container mynav">
+      <div className="row">
+        <div className="account col-sm-2">Welcome Guest</div>
+        <button
+          className="guest-logout col-sm-1" onClick={() => props.guestLogout()}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

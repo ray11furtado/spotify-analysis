@@ -15,6 +15,7 @@ export default (
 		<Route path="login" component={Login} />
 		<Route path="home" component={Auth(Home)} />
 		<Route path="guest" component={gAuth(Guest)} />
+		<Route path="/guest/analyze/:artist/:song" component={gAuth(SongAnalysis)} />
 		<Route path="/analyze/:artist/:song" component={Auth(SongAnalysis)} />
 		<Route path="/playlist" component={Auth(Playlists)} />
 		<Route path="/playlist/:name" component={Auth(Playlist)} />

@@ -21,10 +21,10 @@ function login(props) {
 				This is app intended for Portfolio Purposes
 			</h6>
 			<h6>
-				No Spotify{'?'} Continue As Guset
+				No Spotify{'?'}
 			</h6>
-			<button onClick={() => props.guestLogin()}>
-				Guest
+			<button className="guest" onClick={() => props.guestLogin()}>
+				Continue as Guest
 			</button>
 		</div>
 	);

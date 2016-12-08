@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as actions from '../actions';
+import GuestNav from './guest_navbar';
 
 require('../style/navbar.scss');
 
@@ -22,6 +23,8 @@ class Navbar extends Component {
 				</span>
 				</div>
 				);
+		} else if (this.props.guest.login) {
+			return <GuestNav />
 		}
 		return <div />;
 	}
@@ -37,7 +40,9 @@ class Navbar extends Component {
 
 function mapStateToProps(state) {
 	return { authenticated: state.authenticated,
-						user: state.user };
+						user: state.user,
+					 	guest: state.guest
+					};
 }
 
 export default connect(mapStateToProps, actions)(Navbar);

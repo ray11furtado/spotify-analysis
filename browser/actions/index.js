@@ -56,7 +56,6 @@ export function signin() {
 }
 
 export function guestLogin() {
-	console.log('Guest Login');
 	return (dispatch) => {
 		dispatch({ type: GUEST_LOGIN, payload: true });
 		browserHistory.push('/guest');

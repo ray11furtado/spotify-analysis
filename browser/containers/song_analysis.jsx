@@ -4,6 +4,7 @@ import * as actions from '../actions';
 import EmotionGraph from '../components/emotion_graph';
 import SentimentGraph from '../components/sentiment_graph';
 import Loading from '../components/loading';
+import Credits from '../components/credits';
 
 require('../style/graphs.scss');
 
@@ -44,6 +45,7 @@ class songAnalysis extends Component {
     return (
       <div>
         <div>{this.songInfo()}</div>
+        <Credits />
       </div>
     );
   }

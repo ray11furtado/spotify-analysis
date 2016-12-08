@@ -9,7 +9,6 @@ const INITIAL_STATE = { login: false, count: 0 };
 export default function (state = INITIAL_STATE, action) {
   switch (action.type) {
     case GUEST_LOGIN:
-      console.log('From Action', action.payload);
       return { ...state, login: action.payload };
     case GUEST_LOGOUT: {
       return { ...state, login: action.payload };
