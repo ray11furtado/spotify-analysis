@@ -2,8 +2,7 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { musixAPI } from '../config';
 import {
-	LOG_IN,
-	LOG_OUT,
+	SIGN_OUT,
 	SIGN_IN,
 	SEARCH_PLAYLIST,
 	GET_LYRICS,
@@ -19,19 +18,11 @@ const MusixMatch = 'https://api.musixmatch.com/ws/1.1/';
 const LyricAPI = `&apikey=${musixAPI}`;
 const format = 'format=jsonp&callback=callback';
 
-
-export function login() {
-	return (dispatch) => {
-		dispatch({ type: LOG_IN });
-		browserHistory.push('/home');
-	};
-}
-
 export function logout() {
 	return (dispatch) => {
 		axios.get('/api/users/signout')
 			.then(() => {
-				dispatch({ type: LOG_OUT, payload: null });
+				dispatch({ type: SIGN_OUT, payload: null });
 				browserHistory.push('/login');
 			});
 		};
@@ -50,6 +41,7 @@ export function signin() {
 				.then((playlists) => {
 					data.playlists = playlists;
 					dispatch({ type: SIGN_IN, payload: data });
+					browserHistory.push('/home');
 				});
 		}).catch(() => browserHistory.push('/login'));
 	};

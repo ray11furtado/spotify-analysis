@@ -1,6 +1,6 @@
 import {
 	SIGN_IN,
-	LOG_OUT,
+	SIGN_OUT,
 } from '../actions/types';
 
 const INITIAL_STATE = { id: null, spotify_id: null, accessToken: null, playlist: [] };
@@ -14,8 +14,8 @@ export default function (state = INITIAL_STATE, action) {
 							accessToken: action.payload.access_token,
 							playlist: action.payload.playlists,
 						};
-		case LOG_OUT:
-			return { ...state, id: null, spotify_id: null };
+		case SIGN_OUT:
+			return { ...state, id: null, spotify_id: null, accessToken: null, playlist: null };
 		default:
 			return state;
 	}
