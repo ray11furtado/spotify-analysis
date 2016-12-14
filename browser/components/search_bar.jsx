@@ -31,13 +31,13 @@ class searchBar extends Component {
           placeholder="Artist"
           onChange={this.onArtistChange}
         />
-      <span className="input-group-btn">
+      <span className="input-group">
         <button
-          className="btn btn-success"
+          className="btn-md search-btn"
           disabled={!this.state.songName || !this.state.artist}
           onClick={() => this.props.searchSongs(this.state.songName, this.state.artist)}
         >
-          Submit
+          Search
         </button>
       </span>
     </div>
