@@ -27,6 +27,7 @@ class songAnalysis extends Component {
       <div>
         <EmotionGraph emotion={this.props.song.emotion} />
         <SentimentGraph sentiment={this.props.song.sentiment} />
+        <Credits />
       </div>
     );
   }
@@ -45,7 +46,6 @@ class songAnalysis extends Component {
     return (
       <div>
         <div>{this.songInfo()}</div>
-        <Credits />
       </div>
     );
   }
